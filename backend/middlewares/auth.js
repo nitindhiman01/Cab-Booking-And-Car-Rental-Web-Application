@@ -14,19 +14,19 @@ exports.isAuthenticatedUser = catchASyncErrors(async(req, res, next) => {
 
     const decodedData = jwt.verify(token, "JKDBAJDFKASDFHLASJDKSADFJBLIAUDGSBKJAKDSJB");
 
-    req.user = await User.findbyId(decodedData.id);
+    req.user = await User.findById(decodedData.id);
 
     next();
 });
 
 //Authorizing roles for admin
-exports.authorizrRoles = (...roles) => {
+exports.authorizeRoles = (...roles) => {
     return (req, res, next) => {
         if(!roles.includes(req.user.role)){
-            new ErrorHandler(
+            return next(new ErrorHandler(
                 `Role: ${req.user.role} is not allowed to access this route.`,
                 403
-            );
+            )); 
         }
         next();
     };
