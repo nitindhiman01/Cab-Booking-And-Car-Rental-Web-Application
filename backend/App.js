@@ -11,8 +11,10 @@ app.use(cookieparser());
 
 //Route Imports
 const userRoute = require("./routes/userRoutes");
+const rentCarRoute = require("./routes/rentCarRoutes");
 
 app.use("", userRoute);
+app.use("", rentCarRoute);
 
 
 //Middleware for errors
