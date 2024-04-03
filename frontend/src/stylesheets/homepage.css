@@ -1,0 +1,53 @@
+.home-img-container > img{
+    height: 650px;
+    width: 85%;
+    border-radius: 35%;
+}
+
+.home-img-container{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.home-main{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 48px;
+}
+
+.home-ride-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.home-main-line > h2{
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 64px;
+}
+
+.home-main-line > p{
+    font-size: 16px;
+    font-weight: normal;
+    letter-spacing: 0;
+}
+
+.home-booking-form{
+    display: flex;
+    flex-direction: column;
+}
+
+.home-booking-form > input{
+    margin-top: 8px;
+    height: 40px;
+    width: 350px;
+    padding: 5px;
+}
+
+
+.color{
+    background-color: #f2f4f6;
+}

@@ -1,0 +1,15 @@
+.navbar-buttons{
+    background-color: black;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    width: max-content;
+    padding: 12px 12px;
+    line-height: 16px;
+    font-size: 14px;
+
+}
+
+.navbar-buttons:hover{
+    background-color: #2d2d2d;
+}
