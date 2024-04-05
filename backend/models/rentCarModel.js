@@ -56,7 +56,7 @@ const rentCarSchema = new mongoose.Schema({
         uppercase: true,
     },
     num_trips: {
-        type: String,
+        type: Number,
         default: 0,
     },
     reviews: [
