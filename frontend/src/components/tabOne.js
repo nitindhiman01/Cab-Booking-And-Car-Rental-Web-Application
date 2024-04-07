@@ -3,12 +3,12 @@ import "../stylesheets/homepage.css";
 import "../stylesheets/tabs.css";
 
 
-function Tab1(){
+function Tab1(props){
     return(
         <div className = "tabOne home-booking-form">
             <input name='location-box' placeholder='Enter Location'></input>
             <input name='destination-box' placeholder='Enter Destination'></input>
-            <button className="tab1Button" type='submit'>Search Cabs</button>
+            <button className="tab1Button" type='submit'>Search {props.buttonName} Cars</button>
         </div>
         
     );

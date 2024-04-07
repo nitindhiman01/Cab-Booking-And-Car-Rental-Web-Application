@@ -5,4 +5,17 @@
     padding: 5px;
     background-color: white;
 }
+
+.selectInput{
+    margin-top:15px;
+}
+.home-img2 >img{
+    height: 650px;
+    width:65%;
+    border-radius: 100%;
+    clip-path: inset(70px 70px 70px 70px);
+    object-fit:cover;
+
+}
+
     

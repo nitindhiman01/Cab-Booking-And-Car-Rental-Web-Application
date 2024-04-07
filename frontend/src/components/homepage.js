@@ -5,6 +5,7 @@ import MainHomePageImg from "../resources/homepage/home-img-1.jpg";
 // import LocationSearchingIcon from '@mui/icons-material/LocationSearching';
 import "../stylesheets/homepage.css";
 import BasicTabs from './homepageTabs';
+import HomepageContainer from './homepageContainer.js'
 
 function Homepage(){
     return(
@@ -19,15 +20,12 @@ function Homepage(){
                         <h2>Let's Ride...</h2>
                         <p>Enter a location and enjoy your ride with us.</p>
                     </div>
-                    <div className='home-booking-form'>
-                        <input name='location-box' placeholder='Enter Location'></input>
-                        <input name='destination-box' placeholder='Enter Destination'></input>
-                    </div>
                 </div>
                 <div className='home-img-container'>
                     <img src={MainHomePageImg} alt='home-img'></img>
                 </div>
             </div>
+            <HomepageContainer />
         </div>
     );
 }

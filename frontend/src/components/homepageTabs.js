@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Tab1 from './tabOne';
 import Tab2 from './tabTwo';
-import Tab3 from './tabThree';
+
 
 
 function CustomTabPanel(props) {
@@ -60,7 +60,7 @@ export default function BasicTabs() {
       </Box>
       <CustomTabPanel value={value} index={0}>
         Item One
-        <Tab1 />
+        <Tab1 buttonName="Daily" />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         Item Two
@@ -68,7 +68,7 @@ export default function BasicTabs() {
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
         Item Three
-        <Tab3 />
+        <Tab1 buttonName="Outstation" />
       </CustomTabPanel>
     </Box>
   );

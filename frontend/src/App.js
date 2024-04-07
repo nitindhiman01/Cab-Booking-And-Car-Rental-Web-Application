@@ -1,17 +1,21 @@
 import React from "react";
-import ResponsiveAppBar from "./components/navbar";
-import Footer from "./components/footer";
-import "./stylesheets/index.css";
-import Homepage from "./components/homepage";
+// import "./stylesheets/index.css";
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import IndexHomePage from './components/index-homepage.js';
+import RentalHome from './components/rentalHome.js';
+
 
 function App(){
   return(
-    <div>
-      <ResponsiveAppBar />
-      <Homepage />
-      <div style={{height: "600px"}}></div>
-      <Footer />
-    </div>
+      <div>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" index element={<IndexHomePage  />}></Route>"
+            <Route path='/rental' element={<RentalHome />}></Route>
+          </Routes>
+        </BrowserRouter>
+      </div>
+
   );
 }
 
