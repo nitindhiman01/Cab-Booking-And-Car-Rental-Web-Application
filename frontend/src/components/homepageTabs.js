@@ -7,8 +7,6 @@ import Box from '@mui/material/Box';
 import Tab1 from './tabOne';
 import Tab2 from './tabTwo';
 
-
-
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -59,15 +57,12 @@ export default function BasicTabs() {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        Item One
         <Tab1 buttonName="Daily" />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Item Two
         <Tab2 />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        Item Three
         <Tab1 buttonName="Outstation" />
       </CustomTabPanel>
     </Box>

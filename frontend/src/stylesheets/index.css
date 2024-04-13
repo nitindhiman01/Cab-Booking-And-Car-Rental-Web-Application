@@ -10,3 +10,10 @@ a{
 h1, h2{
     font-family: "Raleway", sans-serif;
 }
+
+.back-button{
+    border: none;
+    padding: 10px;
+    border-radius: 25%;
+    cursor: pointer;
+}

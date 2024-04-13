@@ -13,10 +13,12 @@ app.use(cookieparser());
 const userRoute = require("./routes/userRoutes");
 const rentCarRoute = require("./routes/rentCarRoutes");
 const driverRoute = require("./routes/driverRoutes");
+const cabRoute = require("./routes/cabRoutes");
 
 app.use("", userRoute);
 app.use("", rentCarRoute);
 app.use("", driverRoute);
+app.use("", cabRoute);
 
 
 //Middleware for errors

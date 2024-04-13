@@ -1,0 +1,124 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    overflow: clip;
+}
+
+.heading-container{
+    width: 30%;
+    height: 100%;
+    background-color: #ececec;
+    padding: 20px 30px;
+}
+
+.main-container{
+    width: 70%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heading{
+    margin: auto 0;
+}
+
+.choice-container{
+    border-radius: 50px;
+    border: 1px solid #ececec;
+    height: 75%;
+    width: 50%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+.heading > h1{
+    font-weight: 700;
+    font-size: 74px;
+    line-height: 90px;
+}
+
+.selection-container{
+    height: max-content;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    border-radius: 40px;
+    padding: 4px;
+}
+
+.car-img-container{
+    margin-right: 10px;
+}
+
+.car-img-container > img{
+    height: 125px;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    line-height: 22px;
+}
+
+.main-info-container{
+    display: grid;
+    grid-auto-flow: column;
+}
+
+.info-price{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 5px;
+}
+
+.info > p{
+    margin: 0;
+    color: #717171;
+}
+
+.info > h4{
+    margin: 0;
+    margin-bottom: 5px;
+    font-family: "Raleway", sans-serif;
+    font-size: 18px
+}
+
+.price > p{
+    color: #000;
+    margin: 0;
+    margin-top: 3px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.book-button{
+    width: 80px;
+}
+
+.book-button > button{
+    width: 100%;
+    height: 100%;
+    border-radius: 0 40px 40px 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.book-button > button:hover{
+    background-color: #ececec;
+}
+
+.horizontal-line{
+    width: 80%;
+    border: 0;
+    border-bottom: 1.5px #bababa;
+    border-style: solid;
+}
