@@ -1,16 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import GoBackButton from './goBackButton';
 import "../stylesheets/booking.css";
 import CarSelect from './carSelect';
 import {useLocation} from 'react-router-dom';
+import { socket } from '../socket';
 
-const Booking = () => {
+const Booking = (props) => {
     const location = useLocation();
 
-    function handleClick(e){
-        e.preventDefault();
-        console.log(location.state.locationValue);
-        console.log(location.state.destinationValue);
+    const [ButtonValue, setButtonValue] = useState("");
+
+    const handleCallBack = (data) => {
+        setButtonValue(data);
+        console.log(ButtonValue);
+    }
+
+    const handleClick = (event) => {
+        event.preventDefault();
+
+        props.parentCallBack({
+            location_value: location.state.locationValue,
+            dest_value: location.state.destinationValue,
+            button_value: ButtonValue
+        }
+        );
+
+        socket.emit('triggerRequest');
     }
 
   return (
@@ -25,15 +40,15 @@ const Booking = () => {
                 </div>
                 <div className='main-container'>
                     <div className='choice-container'>
-                        <CarSelect value='economy' />
+                        <CarSelect value='economy' location={location.state.locationValue} destination = {location.state.destinationValue} parentCallBack={handleCallBack} />
                         <div className='horizontal-line'></div>
-                        <CarSelect value='Premium' />
+                        <CarSelect value='Premium' location={location.state.locationValue} destination = {location.state.destinationValue} parentCallBack={handleCallBack} />
                         <div className='horizontal-line'></div>
-                        <CarSelect value='Luxury' />
+                        <CarSelect value='Luxury' location={location.state.locationValue} destination = {location.state.destinationValue} parentCallBack={handleCallBack} />
                         <div className='horizontal-line'></div>
-                        <CarSelect value='SUV' />
+                        <CarSelect value='SUV' location={location.state.locationValue} destination = {location.state.destinationValue} parentCallBack={handleCallBack} />
+                        <button onClick={handleClick}>Click</button>
                     </div>
-                    <button onClick={handleClick}>Click</button>
                 </div>
             </div>
         </div>

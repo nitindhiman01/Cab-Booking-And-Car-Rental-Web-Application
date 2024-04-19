@@ -4,9 +4,11 @@ import { thunk }  from 'redux-thunk';
 
 import { composeWithDevTools } from "redux-devtools-extension";
 import { userReducer } from './reducers/userReducer';
+import { driverReducer } from './reducers/driverReducer';
 
 const reducer = combineReducers({
     user: userReducer,
+    driver: driverReducer,
 });
 
 let initialState = {};

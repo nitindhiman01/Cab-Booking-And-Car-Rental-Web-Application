@@ -1,6 +1,7 @@
 import React from 'react';
 import MetaData from './layout/MetaData.js';
 import RentalCars from './rentalCars.js';
+import {useLocation} from 'react-router-dom';
 import ResponsiveAppBar from './navbar.js';
 import Footer from './footer.js';
 import "../stylesheets/rental.css";
@@ -24,6 +25,17 @@ const rentalCars= {
 };
 
 function RentalHome(){
+
+    const location = useLocation();
+
+    function handleClick(e){
+        e.preventDefault();
+
+        console.log(location.state.location);
+        console.log(location.state.rentPackage);
+    
+    }
+
     return(
         <fragment>
             <MetaData title="Rental Cars" />
@@ -33,6 +45,7 @@ function RentalHome(){
                  <RentalCars rentalCars ={rentalCars} />
                  <RentalCars rentalCars ={rentalCars} />
                  <RentalCars rentalCars ={rentalCars} />
+                 <button onClick={handleClick}>click</button>
             </div>
             <Footer />
         </fragment>

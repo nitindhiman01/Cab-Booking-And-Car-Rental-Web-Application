@@ -68,7 +68,7 @@ function Tab1(props){
     function handleClick(event){
         event.preventDefault();
         
-        navigate('/cabBooking',{state: {locationValue, destinationValue}});
+        navigate('/cabBooking',{state: {locationValue, destinationValue, coordinates, destCoordinates}});
     }
 
     return(

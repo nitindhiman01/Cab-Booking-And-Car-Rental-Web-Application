@@ -37,18 +37,16 @@ const driverSchema = new mongoose.Schema({
         type: String,
         default: "driver",
     },
-    carOwned: {
-        name: {
-            type: String,
-            required: [true, "Please provide the name of the car."],
-        },
-        plate_no: {
-            type: String,
-            unique: true,
-            required: [true, "Please provide the plate number of the car."],
-            minLength: [8, "Plate number should be at least 8 characters"],
-            uppercase: true,
-        },
+    carName: {
+        type: String,
+        required: [true, "Please provide the name of the car."],
+    },
+    plate_no: {
+        type: String,
+        unique: true,
+        required: [true, "Please provide the plate number of the car."],
+        minLength: [8, "Plate number should be at least 8 characters"],
+        uppercase: true,
     },
     num_trips: {
         type: Number,

@@ -4,11 +4,33 @@ const catchASyncErrors = require("../middlewares/catchASyncErrors");
 const sendDriverToken = require("../utils/driverJwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
+const cloudinary = require("cloudinary");
 
 //Register a Driver
 exports.registerDriver = catchASyncErrors(async(req, res, next) => {
 
-    const driver = await Driver.create(req.body);
+    
+
+    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+        folder: "avatars",
+        width: 150,
+        crop: "scale",
+    });
+
+    const {name, email, password, carName, plate_no, car_category} = req.body;
+
+    const driver = await Driver.create({
+        name,
+        email,
+        password,
+        avatar : {
+            public_id: myCloud.public_id,
+            url: myCloud.secure_url,
+        },
+        carName,
+        plate_no,
+        car_category,
+    });
 
     sendDriverToken(driver, 200, res);
 });

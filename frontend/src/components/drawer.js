@@ -20,9 +20,9 @@ const MenuProps = {
 };
 
 const names = [
-  '100 Km',
-  '200 Km',
-  '300 Km',
+  '2 Hours 100 Km',
+  '4 Hours 200 Km',
+  '8 Hours 300 Km',
 
 ];
 
@@ -35,7 +35,7 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function MultipleSelect() {
+export default function MultipleSelect(props) {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
 
@@ -47,6 +47,10 @@ export default function MultipleSelect() {
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
     );
+
+    props.parentCallBack(
+      event.target.value
+    )
   };
 
   return (

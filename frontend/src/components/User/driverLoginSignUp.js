@@ -4,17 +4,20 @@ import { Link, useNavigate } from "react-router-dom";
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import FaceIcon from "@mui/icons-material/Face";
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
+import CategoryIcon from '@mui/icons-material/Category';
 import {useDispatch, useSelector} from "react-redux";
-import { clearErrors, login, register } from '../../actions/userActions'; 
+import { clearErrors, login, register } from '../../actions/driverActions'; 
 // import { useAlert } from "react-alert";
 
 
-const LoginSignup = () =>{
+const DriverLoginSignup = () =>{
     const dispatch = useDispatch();
     // const alert = useAlert();
     let navigate = useNavigate();
 
-    const { error, loading, isAuthenticated } = useSelector((state) => state.user);
+    const { error, loading, isAuthenticated } = useSelector((state) => state.driver);
 
     const loginTab = useRef(null);
     const registerTab = useRef(null);
@@ -23,13 +26,16 @@ const LoginSignup = () =>{
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
 
-    const [user, setUser] = useState({
+    const [driver, setDriver] = useState({
         name: "",
         email: "",
         password: "",
+        carName: "",
+        plate_no: "",
+        car_category: ""
     });
 
-    const {name, email, password} = user;
+    const {name, email, password, carName, plate_no, car_category} = driver;
 
     const [avatar, setAvatar] = useState();
     const [avatarPreview, setAvatarPreview] = useState("./profile.png");
@@ -50,6 +56,9 @@ const LoginSignup = () =>{
         myForm.set("email", email);
         myForm.set("password", password);
         myForm.set("avatar", avatar);
+        myForm.set("carName", carName);
+        myForm.set("plate_no", plate_no);
+        myForm.set("car_category", car_category);
 
         dispatch(register(myForm));
         
@@ -67,7 +76,7 @@ const LoginSignup = () =>{
             }
             reader.readAsDataURL(e.target.files[0]);
         } else {
-            setUser({ ...user, [e.target.name]: e.target.value});
+            setDriver({ ...driver, [e.target.name]: e.target.value});
         }
     };
 
@@ -171,6 +180,41 @@ const LoginSignup = () =>{
                                 onChange = {registerDataChange}
                             />
                         </div>
+                        <div className='signUpCar'>
+                            <DirectionsCarIcon />
+                            <input 
+                                type = "text"
+                                placeholder = "Car Name"
+                                required
+                                name="carName"
+                                value = {carName}
+                                onChange = {registerDataChange}
+                            />
+                        </div>
+                        <div className='signUpCarPlate'>
+                            <ConfirmationNumberIcon />
+                            <input 
+                                type = "text"
+                                placeholder = "Car Plate Number"
+                                required
+                                name="plate_no"
+                                value = {plate_no}
+                                onChange = {registerDataChange}
+                            />
+                        </div>
+                        <div className='signUpCarcategory'>
+                            <CategoryIcon />
+                            <input 
+                                type = "text"
+                                placeholder = "Car Category"
+                                required
+                                name="car_category"
+                                value = {car_category}
+                                onChange = {registerDataChange}
+                            />
+                        </div>
+                        
+
                         <div id="registerImage">
                             <img src={avatarPreview} alt='Avatar Preview' />
                             <input 
@@ -184,7 +228,7 @@ const LoginSignup = () =>{
                             type='submit'
                             value="Register"
                             className='signUpButton'
-                            // disabled={loading ? true : false}
+                            disabled={loading ? true : false}
                         />
                         
                     </form>
@@ -195,4 +239,4 @@ const LoginSignup = () =>{
 };
 
 
-export default LoginSignup;
+export default DriverLoginSignup;

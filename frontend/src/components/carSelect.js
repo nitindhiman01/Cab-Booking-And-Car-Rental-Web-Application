@@ -8,6 +8,12 @@ const CarSelect = (props) => {
     function handleClick(event){
         event.preventDefault();
         console.log(event.currentTarget.value);
+        console.log(props.location);
+        console.log(props.destination);
+
+        props.parentCallBack(
+            event.currentTarget.value
+        );
     }
 
   return (
@@ -34,4 +40,4 @@ const CarSelect = (props) => {
   )
 }
 
-export default CarSelect
+export default CarSelect;

@@ -1,9 +1,9 @@
-import { LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, CLEAR_ERRORS, REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS, REGISTER_USER_FAIL } from "../constants/userConstants";
+import { DRIVER_LOGIN_FAIL, DRIVER_LOGIN_REQUEST, DRIVER_LOGIN_SUCCESS, CLEAR_ERRORS, REGISTER_DRIVER_REQUEST, REGISTER_DRIVER_SUCCESS, REGISTER_DRIVER_FAIL } from "../constants/userConstants";
 import axios from "axios";
 
 export const login = (email, password) => async (dispatch) => {
     try {
-        dispatch({type: LOGIN_REQUEST});
+        dispatch({type: DRIVER_LOGIN_REQUEST});
 
         const config = { 
             headers: { 
@@ -11,39 +11,35 @@ export const login = (email, password) => async (dispatch) => {
             } 
         };
 
-        console.log("start");
-
         const {data} = await axios.post(
-            `http://localhost:3000/login`,
+            `http://localhost:3000/driver/login`,
             {email, password},
             config,
         );
 
-        console.log(data);
-
-        dispatch({type: LOGIN_SUCCESS, payload: data.user});
+        dispatch({type: DRIVER_LOGIN_SUCCESS, payload: data.user});
 
     } catch (error) {
-        dispatch({type: LOGIN_FAIL, payload: error.message});
+        dispatch({type: DRIVER_LOGIN_FAIL, payload: error.message});
     }
 };
 
 export const register = (userData) => async (dispatch) => {
     try {
-        dispatch({type: REGISTER_USER_REQUEST});
+        dispatch({type: REGISTER_DRIVER_REQUEST});
 
         const config = {headers: { "Content-Type": "multipart/form-data"}};
 
         const {data} = await axios.post(
-            `http://localhost:3000/register`,
+            `http://localhost:3000/driver/register`,
             userData,
             config
         );
 
-        dispatch({type: REGISTER_USER_SUCCESS, payload: data.user});
+        dispatch({type: REGISTER_DRIVER_SUCCESS, payload: data.user});
     } catch (error) {
         dispatch({
-            type: REGISTER_USER_FAIL,
+            type: REGISTER_DRIVER_FAIL,
             payload: error.response.data
         });
     }
