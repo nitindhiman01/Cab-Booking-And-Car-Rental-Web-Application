@@ -4,11 +4,13 @@ const cors = require('cors');
 const cloudinary = require("cloudinary");
 const jwt = require("jsonwebtoken");
 
+
 const app = require("./App");
 const connectDatabase = require("./config/database");
 const { isAuthenticatedUser } = require("./middlewares/auth");
 const { isAuthenticatedDriver } = require("./middlewares/authDriver");
 const cookieParser = require("cookie-parser");
+const  Razorpay  = require("razorpay");
 const ErrorHandler = require("./utils/errorHandler");
 
 
@@ -31,6 +33,13 @@ const io = new Server(server, {
         credentials: true,
     }
 });
+
+//Razorpay Integration
+
+exports.instance = new Razorpay({
+    key_id:"rzp_test_pJzyKZ1Oj6uTnT",
+    key_secret: "iAyT6czWVGRCCvbkXHaOMHsUiAyT6czWVGRCCvbkXHaOMHsU",
+  });
 
 app.use(cors({
     origin:"http://localhost:3001",

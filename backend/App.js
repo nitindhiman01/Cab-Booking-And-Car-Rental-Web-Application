@@ -2,6 +2,9 @@ const express = require("express");
 const cookieparser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
+const { config } = require("dotenv");
+
+config({path: "./config/config.env"})
 
 const app = express();
 
@@ -18,11 +21,15 @@ const userRoute = require("./routes/userRoutes");
 const rentCarRoute = require("./routes/rentCarRoutes");
 const driverRoute = require("./routes/driverRoutes");
 const bookingRoute = require("./routes/bookingRoutes");
+const paymentRoute = require("./routes/paymentRoute");
+
 
 app.use("", userRoute);
 app.use("", rentCarRoute);
 app.use("", driverRoute);
 app.use("", bookingRoute);
+app.use("", paymentRoute);
+
 
 
 //Middleware for errors
