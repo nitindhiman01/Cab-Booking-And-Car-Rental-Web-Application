@@ -27,11 +27,11 @@ router.route("/password/reset/:token").put(resetPassword);
 
 router.route("/logout").get(logoutUser);
 
-router.route("/account").get(isAuthenticatedUser ,getUserDetails);
+router.route("/account").get(getUserDetails);
 
-router.route("/password/update").put(isAuthenticatedUser, updatePassword);
+router.route("/password/update").put(updatePassword);
 
-router.route("/account/update").put(isAuthenticatedUser, updateProfile);
+router.route("/account/update").put(updateProfile);
 
 router.route("/admin/users").get(isAuthenticatedUser, authorizeRoles("admin"), getAllUsers);
 

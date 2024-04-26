@@ -11,13 +11,19 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import "../stylesheets/navbar.css";
+import {useNavigate} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
+import { logout } from '../actions/userActions';
+import {useAlert} from 'react-alert';
 
 const pages = ['Ride', 'Drive', 'Rental', 'About'];
-const settings = ['Profile', 'Sign in', 'Sign up', 'Logout'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const alert = useAlert();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -33,6 +39,27 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  function handleClick(e){
+    e.preventDefault();
+    navigate('/account');
+  }
+
+  function handleLogout(e){
+    e.preventDefault();
+    dispatch(logout());
+    alert.success("Log Out Successfully!");
+  }
+
+  function handleLogin(e){
+    e.preventDefault();
+    navigate('login');
+  }
+
+  function handleDriverSignIn(e){
+    e.preventDefault();
+    navigate('/driver/login');
+  }
 
   return (
     <AppBar position="sticky" style={{backgroundColor: "black"}}>
@@ -145,11 +172,12 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              <ul>
+                <li><button onClick={handleClick}>Account</button></li>
+                <li><button onClick={handleLogin}> User Sign in</button></li>
+                <li><button onClick={handleDriverSignIn}>Driver Sign In</button></li>
+                <li><button onClick={handleLogout}>Log Out</button></li>
+              </ul>
             </Menu>
           </Box>
         </Toolbar>

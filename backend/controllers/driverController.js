@@ -85,6 +85,7 @@ exports.forgotDriverPassword = catchASyncErrors(async(req, res, next) => {
     await driver.save({validateBeforeSave : false});
 
     const resetPasswordURL = `${req.protocol}://${req.get("host")}/password/reset/${resetToken}`;
+    console.log(resetPasswordURL);
 
     const message = `Your Password reset token is :- \n\n ${resetPasswordURL} \n\nIf you have not requested this then just ignore it.`;
 
@@ -147,7 +148,7 @@ exports.getDriverDetails = catchASyncErrors(async(req, res, next) => {
 
 //Update the Driver Password
 exports.updateDriverPassword = catchASyncErrors(async(req, res, next) => {
-    const driver = await Driver.findById(req.driver.id).select("+password");
+    const driver = await Driver.findById(req.body.driverid).select("+password");
 
     const isPasswordMatched = await driver.comparePassword(req.body.oldPassword);
 
@@ -173,9 +174,7 @@ exports.updateDriverProfile = catchASyncErrors(async(req, res, next) => {
         email: req.body.email
     };
 
-    //adding cloudinary later for avatar
-
-    const driver = await Driver.findByIdAndUpdate(req.driver.id, newDriverData, {
+    const driver = await Driver.findByIdAndUpdate(req.body.driverid, newDriverData, {
         new: true,
         runValidators: true,
         useFindAndModify: false

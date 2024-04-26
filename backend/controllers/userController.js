@@ -82,6 +82,8 @@ exports.forgotPassword = catchASyncErrors(async(req, res, next) => {
 
     const resetPasswordURL = `${req.protocol}://${req.get("host")}/password/reset/${resetToken}`;
 
+    console.log(resetPasswordURL);
+
     const message = `Your Password reset token is :- \n\n ${resetPasswordURL} \n\nIf you have not requested this then just ignore it.`;
 
     try {
@@ -98,12 +100,12 @@ exports.forgotPassword = catchASyncErrors(async(req, res, next) => {
         });
 
     } catch (error) {
-        user.resetPasswordToken = undefined;
-        user.resetPasswordExpire = undefined;
+        // user.resetPasswordToken = undefined;
+        // user.resetPasswordExpire = undefined;
 
         await user.save({validateBeforeSave: false});
 
-        return next(new ErrorHandler(error.message, 500))
+        return next(new ErrorHandler(error.message, 500));
     }
 });
 
@@ -113,6 +115,7 @@ exports.resetPassword = catchASyncErrors(async(req, res, next) => {
     const resetPasswordToken = crypto.createHash("sha256").update(req.params.token).digest("hex");
 
     const user = await User.findOne({resetPasswordToken, resetPasswordExpire: { $gt: Date.now() }});
+    console.log(user);
 
     if(!user){
         return next(new ErrorHandler("Reset Password Token is invalid or expired.", 400));
@@ -143,7 +146,7 @@ exports.getUserDetails = catchASyncErrors(async(req, res, next) => {
 
 //Update the user Password
 exports.updatePassword = catchASyncErrors(async(req, res, next) => {
-    const user = await User.findById(req.user.id).select("+password");
+    const user = await User.findById(req.body.userid).select("+password");
 
     const isPasswordMatched = await user.comparePassword(req.body.oldPassword);
 
@@ -169,9 +172,26 @@ exports.updateProfile = catchASyncErrors(async(req, res, next) => {
         email: req.body.email
     };
 
-    //adding cloudinary later for avatar
+    if(req.body.avatar !== ""){
+        const user = await User.findById(req.body.userid);
 
-    const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+        const imageID = user.avatar.public_id;
+
+        await cloudinary.v2.uploader.destroy(imageID);
+
+        const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+            folder: "avatars",
+            width: 150,
+            crop: "scale",
+        });
+
+        newUserData.avatar = {
+            public_id: myCloud.public_id,
+            url: myCloud.secure_url,
+        }
+    }
+
+    const user = await User.findByIdAndUpdate(req.body.userid, newUserData, {
         new: true,
         runValidators: true,
         useFindAndModify: false

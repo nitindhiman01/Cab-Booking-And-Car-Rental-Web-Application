@@ -6,12 +6,12 @@ import LockOpenIcon from "@mui/icons-material/LockOpen";
 import FaceIcon from "@mui/icons-material/Face";
 import {useDispatch, useSelector} from "react-redux";
 import { clearErrors, login, register } from '../../actions/userActions'; 
-// import { useAlert } from "react-alert";
+import { useAlert } from "react-alert";
 
 
 const LoginSignup = () =>{
     const dispatch = useDispatch();
-    // const alert = useAlert();
+    const alert = useAlert();
     let navigate = useNavigate();
 
     const { error, loading, isAuthenticated } = useSelector((state) => state.user);
@@ -72,18 +72,16 @@ const LoginSignup = () =>{
     };
 
     useEffect(() => {
-        // if(error) {
-        //     alert.error(error);
-        //     dispatch(clearErrors());
-        // }
+        if(error) {
+            alert.error(error);
+            dispatch(clearErrors());
+        }
 
         if(isAuthenticated){
-            // history.push("/account");
-            navigate('/');
+            navigate('/', {replace: true});
         }
  
-    }, [isAuthenticated]);
-//dispatch, error, alert
+    }, [isAuthenticated, dispatch, error, alert]);
 
     const switchTabs = (e, tab) =>{
         if(tab === "login"){

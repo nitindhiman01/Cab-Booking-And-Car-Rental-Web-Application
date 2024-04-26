@@ -9,12 +9,12 @@ import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import CategoryIcon from '@mui/icons-material/Category';
 import {useDispatch, useSelector} from "react-redux";
 import { clearErrors, login, register } from '../../actions/driverActions'; 
-// import { useAlert } from "react-alert";
+import { useAlert } from "react-alert";
 
 
 const DriverLoginSignup = () =>{
     const dispatch = useDispatch();
-    // const alert = useAlert();
+    const alert = useAlert();
     let navigate = useNavigate();
 
     const { error, loading, isAuthenticated } = useSelector((state) => state.driver);
@@ -81,18 +81,16 @@ const DriverLoginSignup = () =>{
     };
 
     useEffect(() => {
-        // if(error) {
-        //     alert.error(error);
-        //     dispatch(clearErrors());
-        // }
+        if(error) {
+            alert.error(error);
+            dispatch(clearErrors());
+        }
 
         if(isAuthenticated){
-            // history.push("/account");
-            navigate('/');
+            navigate('/driver/dashboard');
         }
  
-    }, [isAuthenticated]);
-//dispatch, error, alert
+    }, [isAuthenticated, dispatch, error, alert]);
 
     const switchTabs = (e, tab) =>{
         if(tab === "login"){
@@ -143,7 +141,7 @@ const DriverLoginSignup = () =>{
                                 onChange = {(e) => setLoginPassword(e.target.value)}
                             />
                         </div>
-                        <Link to ="/password/forgot">Forget Password ?</Link>
+                        <Link to ="/driver/password/forgot">Forget Password ?</Link>
                         <input type = "submit" value="Login" className = "loginButton" />
                     </form>
                     <form className='signUpForm' ref={registerTab} encType='multipart/form-data' onSubmit={registerSubmit}>

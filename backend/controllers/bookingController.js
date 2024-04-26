@@ -4,13 +4,13 @@ const Booking = require("../models/bookingModel");
 
 //New booking
 exports.newBooking = catchASyncErrors(async(req,res,next) => {
-    const {location, package, car} = req.body;
+    const {location, package, car, user} = req.body;
 
     const booking = await Booking.create({
         location,
         package,
         car,
-        user: req.user._id,
+        user,
     });
 
     res.status(201).json({
@@ -38,7 +38,7 @@ exports.getSingleBooking = catchASyncErrors(async (req, res, next) => {
   
   // get logged in user  Orders
   exports.myBookings = catchASyncErrors(async (req, res, next) => {
-    const bookings = await Booking.find({ user: req.user._id });
+    const bookings = await Booking.find({ user: req.body.userid });
   
     res.status(200).json({
       success: true,

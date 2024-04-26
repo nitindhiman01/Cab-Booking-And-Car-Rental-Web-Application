@@ -2,7 +2,6 @@ const { Server } = require("socket.io");
 const {createServer} = require('http');
 const cors = require('cors');
 const cloudinary = require("cloudinary");
-const jwt = require("jsonwebtoken");
 
 
 const app = require("./App");
@@ -10,9 +9,13 @@ const connectDatabase = require("./config/database");
 const { isAuthenticatedUser } = require("./middlewares/auth");
 const { isAuthenticatedDriver } = require("./middlewares/authDriver");
 const cookieParser = require("cookie-parser");
-const  Razorpay  = require("razorpay");
 const ErrorHandler = require("./utils/errorHandler");
 
+app.use(cors({
+    origin:'http://localhost:3001',
+    methods: ["GET", "POST", "PUT"],
+    credentials: true,
+}));
 
 //Connecting to database
 connectDatabase();
@@ -34,38 +37,6 @@ const io = new Server(server, {
     }
 });
 
-//Razorpay Integration
-
-exports.instance = new Razorpay({
-    key_id:"rzp_test_pJzyKZ1Oj6uTnT",
-    key_secret: "iAyT6czWVGRCCvbkXHaOMHsUiAyT6czWVGRCCvbkXHaOMHsU",
-  });
-
-app.use(cors({
-    origin:"http://localhost:3001",
-    methods: ["GET", "POST"],
-    credentials: true,
-}));
-
-
-// io.use((socket, next) => {
-//     cookieParser()(socket.request, socket.request.res, (err) => {
-//         if(err){
-//             return next(err);
-//         }
-
-//         const token = socket.request.cookies.token;
-
-//         if(!token){
-//             return next(new Error("auth error"));
-//         }
-
-//         const decodedData = jwt.verify(token, "JKDBAJDFKASDFHLASJDKSADFJBLIAUDGSBKJAKDSJB");
-//         next();
-//     });
-// });
-
-
 io.on("connection", (socket) => {
     console.log("user Connected: ", socket.id);
     socket.emit("welcome", "Welcome to the server!");
@@ -83,10 +54,6 @@ io.on("connection", (socket) => {
         console.log("user disconnected.", socket.id);
     })
 });
-
-// app.use(cors());
-
-
 
 server.listen(3000, () => {
     console.log(`Server is running at port 3000`);

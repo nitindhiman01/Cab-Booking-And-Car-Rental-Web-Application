@@ -21,16 +21,11 @@ const userRoute = require("./routes/userRoutes");
 const rentCarRoute = require("./routes/rentCarRoutes");
 const driverRoute = require("./routes/driverRoutes");
 const bookingRoute = require("./routes/bookingRoutes");
-const paymentRoute = require("./routes/paymentRoute");
-
 
 app.use("", userRoute);
 app.use("", rentCarRoute);
 app.use("", driverRoute);
 app.use("", bookingRoute);
-app.use("", paymentRoute);
-
-
 
 //Middleware for errors
 app.use(errorMiddleware);

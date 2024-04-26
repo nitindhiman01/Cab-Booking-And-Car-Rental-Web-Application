@@ -1,53 +1,36 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import MetaData from './layout/MetaData.js';
 import RentalCars from './rentalCars.js';
 import {useLocation} from 'react-router-dom';
-import ResponsiveAppBar from './navbar.js';
-import Footer from './footer.js';
+import GoBackButton from './goBackButton';
+import { getrentCars } from '../actions/rentActions.js';
+import {useSelector, useDispatch} from 'react-redux';
 import "../stylesheets/rental.css";
 import "../stylesheets/footer.css";
 
-
-
-const rentalCars= {
-    name: "Range Rover",
-    _id: "aastha",
-    // model: 2024,
-    // category: "luxury SUV",
-    // transmission: "manual",
-    price: 5000,
-    images:[{url: "https://wallpaperaccess.com/full/2103829.jpg"}],
-    // fueltype: "petrol",
-    // occupancy: 5,
-    // plate_number: "HR 26 jmd",
-    // num_trips: 10,
-    // reviews: "5+ stars"
-};
-
 function RentalHome(){
 
+    const dispatch = useDispatch();
+    const {loading, error, rentCars} = useSelector(state => state.rentCars);
+
+    useEffect(() => {
+        dispatch(getrentCars());
+    }, [dispatch]);
+
     const location = useLocation();
-
-    function handleClick(e){
-        e.preventDefault();
-
-        console.log(location.state.location);
-        console.log(location.state.rentPackage);
-    
-    }
 
     return(
         <fragment>
             <MetaData title="Rental Cars" />
-            <ResponsiveAppBar />
-            <div className= "container" id= "container">
-                 <RentalCars rentalCars ={rentalCars} />
-                 <RentalCars rentalCars ={rentalCars} />
-                 <RentalCars rentalCars ={rentalCars} />
-                 <RentalCars rentalCars ={rentalCars} />
-                 <button onClick={handleClick}>click</button>
+            <div className='box-container'>
+                <div className='rent-heading-container'>
+                    <GoBackButton />
+                    <h1>Choose <br/> Your <br/> Ride</h1>
+                </div>
+                <div className= "rent-container" id= "container">
+                    {rentCars && rentCars.map((rentCar) => <RentalCars rentalCars = {rentCar} location = {location.state.location} package = {location.state.rentPackage}/> )}
+                </div> 
             </div>
-            <Footer />
         </fragment>
     );
 }

@@ -9,10 +9,15 @@ const Booking = (props) => {
     const location = useLocation();
 
     const [ButtonValue, setButtonValue] = useState("");
+    var price = 0;
 
     const handleCallBack = (data) => {
         setButtonValue(data);
         console.log(ButtonValue);
+    }
+
+    const handleDistanceCall = (data) => {
+        price = data;
     }
 
     const handleClick = (event) => {
@@ -21,12 +26,17 @@ const Booking = (props) => {
         props.parentCallBack({
             location_value: location.state.locationValue,
             dest_value: location.state.destinationValue,
-            button_value: ButtonValue
+            button_value: ButtonValue,
+            distance: location.state.round_dist,
         }
         );
+        
+        console.log(price);
 
         socket.emit('triggerRequest');
     }
+
+
 
   return (
     <div>
@@ -40,13 +50,13 @@ const Booking = (props) => {
                 </div>
                 <div className='main-container'>
                     <div className='choice-container'>
-                        <CarSelect value='economy' location={location.state.locationValue} destination = {location.state.destinationValue} parentCallBack={handleCallBack} />
+                        <CarSelect value='economy' location={location.state.locationValue} destination = {location.state.destinationValue} distance = {location.state.round_dist} parentCallBack={handleCallBack} distanceCallBack={handleDistanceCall} />
                         <div className='horizontal-line'></div>
-                        <CarSelect value='Premium' location={location.state.locationValue} destination = {location.state.destinationValue} parentCallBack={handleCallBack} />
+                        <CarSelect value='Premium' location={location.state.locationValue} destination = {location.state.destinationValue} distance = {location.state.round_dist} parentCallBack={handleCallBack} distanceCallBack={handleDistanceCall} />
                         <div className='horizontal-line'></div>
-                        <CarSelect value='Luxury' location={location.state.locationValue} destination = {location.state.destinationValue} parentCallBack={handleCallBack} />
+                        <CarSelect value='Luxury' location={location.state.locationValue} destination = {location.state.destinationValue} distance = {location.state.round_dist} parentCallBack={handleCallBack} distanceCallBack={handleDistanceCall} />
                         <div className='horizontal-line'></div>
-                        <CarSelect value='SUV' location={location.state.locationValue} destination = {location.state.destinationValue} parentCallBack={handleCallBack} />
+                        <CarSelect value='SUV' location={location.state.locationValue} destination = {location.state.destinationValue} distance = {location.state.round_dist} parentCallBack={handleCallBack} distanceCallBack={handleDistanceCall} />
                         <button onClick={handleClick}>Click</button>
                     </div>
                 </div>

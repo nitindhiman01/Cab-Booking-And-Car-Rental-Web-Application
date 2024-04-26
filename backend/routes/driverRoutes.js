@@ -30,9 +30,9 @@ router.route("/driver/logout").get(logoutDriver);
 
 router.route("/driver/account").get(isAuthenticatedDriver ,getDriverDetails);
 
-router.route("/driver/password/update").put(isAuthenticatedDriver, updateDriverPassword);
+router.route("/driver/password/update").put(updateDriverPassword);
 
-router.route("/driver/account/update").put(isAuthenticatedDriver, updateDriverProfile);
+router.route("/driver/account/update").put(updateDriverProfile);
 
 router.route("/admin/alldrivers").get(isAuthenticatedUser, authorizeRoles("admin"), getAllDrivers);
 

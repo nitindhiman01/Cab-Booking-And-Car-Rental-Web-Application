@@ -38,6 +38,10 @@ const rentCarSchema = new mongoose.Schema({
             }
         }
     ],
+    rating: {
+        type: Number,
+        default: 0
+    },
     fueltype: {
         type: String,
         required: [true, "Please enter the fuel type."],
@@ -63,10 +67,6 @@ const rentCarSchema = new mongoose.Schema({
         {
             name: {
                 type: String,
-                required: true,
-            },
-            rating: {
-                type: Number,
                 required: true,
             },
             comment: {

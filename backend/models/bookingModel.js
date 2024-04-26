@@ -18,7 +18,9 @@ const bookingSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.ObjectId,
         ref: "User",
-        required: true
+        // type: String,
+        required: [true, "Please Login to access this."],
+        // default: "admin"
     }
 });
 

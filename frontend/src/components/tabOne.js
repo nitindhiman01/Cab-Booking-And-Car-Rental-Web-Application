@@ -65,10 +65,22 @@ function Tab1(props){
         
     };
 
+    function getDistance(){
+        const r = 6371;
+        const p = Math.PI / 180;
+
+        const a = 0.5 - Math.cos((destCoordinates[1] - coordinates[1])*p) / 2 + Math.cos(coordinates[1]*p) * Math.cos(destCoordinates[1]*p) * (1 - Math.cos((destCoordinates[0] - coordinates[0]) * p)) / 2;
+
+        return 2 * r * Math.asin(Math.sqrt(a));
+    }
+
     function handleClick(event){
         event.preventDefault();
+
+        const dist = getDistance();
+        const round_dist = Math.round(dist*100)/100;
         
-        navigate('/cabBooking',{state: {locationValue, destinationValue, coordinates, destCoordinates}});
+        navigate('/cabBooking',{state: {locationValue, destinationValue, coordinates, destCoordinates, round_dist}});
     }
 
     return(

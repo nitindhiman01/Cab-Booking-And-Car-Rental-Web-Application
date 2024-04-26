@@ -3,6 +3,8 @@ import Map from './map';
 import {useLocation} from 'react-router-dom';
 import { socket } from '../socket';
 import "../stylesheets/userRequest.css";
+import GooglePayButton from '@google-pay/button-react';
+import {useAlert} from 'react-alert';
 
 const UserRequest = () => {
 
@@ -11,6 +13,7 @@ const UserRequest = () => {
     const [message, setMessage] = useState("");
     const [messages, setMessages] = useState([]);
     const [socketid, setSocketid] = useState([]);
+    const alert = useAlert();
 
     const location = useLocation();
 
@@ -26,7 +29,7 @@ const UserRequest = () => {
             setSocketid([...socketid, data.id]);
             setMessages([...messages, data.message]);
         })
-    })
+    });
 
     return (
         <div className='user-request'>
@@ -53,7 +56,53 @@ const UserRequest = () => {
                 </div>
                 <div className='buttons'>
                     <div className='end-button'>
-                        <button className='payment-button'>Complete Payment</button>
+                    <GooglePayButton
+                    environment="TEST"
+                    paymentRequest={{
+                    apiVersion: 2,
+                    apiVersionMinor: 0,
+                    allowedPaymentMethods: [
+                        {
+                        type: "CARD",
+                        parameters: {
+                            allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
+                            allowedCardNetworks: ["MASTERCARD", "VISA"],
+                        },
+                        tokenizationSpecification: {
+                            type: "PAYMENT_GATEWAY",
+                            parameters: {
+                            gateway: "example",
+                            gatewayMerchantId: "exampleGatewayMerchantId",
+                            },
+                        },
+                        },
+                    ],
+                    merchantInfo: {
+                        merchantId: "12345678901234567890",
+                        merchantName: "Demo Merchant",
+                    },
+                    transactionInfo: {
+                        totalPriceStatus: "FINAL",
+                        totalPriceLabel: "Total",
+                        totalPrice: `600`,
+                        currencyCode: "INR",
+                        countryCode: "IN",
+                    },
+                    shippingAddressRequired: true,
+                    callbackIntents: ["PAYMENT_AUTHORIZATION"],
+                    }}
+                    onLoadPaymentData={(paymentRequest) => {
+                    console.log(paymentRequest);
+                    }}
+                    onPaymentAuthorized={paymentData =>{
+                    console.log('paymentData ' + paymentData);
+                    alert.success("Payment Received. Ride Completed!");   
+                    return { transactionState: 'SUCCESS'}
+                    }}
+                    existingPaymentMethodRequired='false'
+                    buttonColor="black"
+                    buttonType="buy"
+                ></GooglePayButton>
                     </div>
                 </div>
             </div>
