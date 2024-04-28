@@ -4,12 +4,12 @@ const { isAuthenticatedUser, authorizeRoles } = require("../middlewares/auth");
 
 const router = express.Router();
 
-router.route("/rent/admin/registervehicle").post(isAuthenticatedUser, authorizeRoles("admin"), registerCar);
+router.route("/rent/admin/registervehicle").post(authorizeRoles("admin"), registerCar);
 
 router.route("/rent/allcars").get(getAllRentCars);
 
 router.route("/rent/:id").get(getSingleRentCar);
 
-router.route("/rent/admin/:id").put(isAuthenticatedUser, authorizeRoles("admin"), updateRentCar).delete(isAuthenticatedUser, authorizeRoles("admin"), deleteRentCar);
+router.route("/rent/admin/:id").put(authorizeRoles("admin"), updateRentCar).delete(deleteRentCar);
 
 module.exports = router

@@ -23,9 +23,9 @@ exports.isAuthenticatedUser = catchASyncErrors(async(req, res, next) => {
 //Authorizing roles for admin
 exports.authorizeRoles = (...roles) => {
     return (req, res, next) => {
-        if(!roles.includes(req.user.role)){
+        if(!roles.includes(req.body.userRole)){
             return next(new ErrorHandler(
-                `Role: ${req.user.role} is not allowed to access this route.`,
+                `Role: ${req.body.userRole} is not allowed to access this route.`,
                 403
             )); 
         }

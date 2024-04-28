@@ -11,7 +11,6 @@ function IndexHomePage(){
             <MetaData title="CarBuddy"></MetaData>
             <ResponsiveAppBar />
             <Homepage />
-            <div style={{height: "600px"}}></div>
             <Footer />
         </div>
     );

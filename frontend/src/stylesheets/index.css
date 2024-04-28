@@ -17,3 +17,20 @@ h1, h2{
     border-radius: 25%;
     cursor: pointer;
 }
+
+.admin-dash{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.buttons > button{
+    padding: 30px;
+    border: none;
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    margin: 20px;
+}

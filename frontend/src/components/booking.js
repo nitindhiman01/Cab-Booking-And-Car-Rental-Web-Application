@@ -57,7 +57,8 @@ const Booking = (props) => {
                         <CarSelect value='Luxury' location={location.state.locationValue} destination = {location.state.destinationValue} distance = {location.state.round_dist} parentCallBack={handleCallBack} distanceCallBack={handleDistanceCall} />
                         <div className='horizontal-line'></div>
                         <CarSelect value='SUV' location={location.state.locationValue} destination = {location.state.destinationValue} distance = {location.state.round_dist} parentCallBack={handleCallBack} distanceCallBack={handleDistanceCall} />
-                        <button onClick={handleClick}>Click</button>
+                        <button onClick={handleClick}>Book</button>
+                        <a href='/userRequest'>Go to Ride</a>
                     </div>
                 </div>
             </div>

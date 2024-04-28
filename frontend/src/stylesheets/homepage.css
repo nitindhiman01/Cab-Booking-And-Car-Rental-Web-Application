@@ -1,19 +1,22 @@
 .home-img-container > img{
-    height: 650px;
+    /* height: 550px;
     width: 85%;
-    border-radius: 35%;
+    border-radius: 35%; */
+    border-radius: 12px;
 }
 
 .home-img-container{
     display: flex;
     justify-content: flex-end;
+    padding-right: 80px;
 }
 
 .home-main{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    padding: 48px;
+    padding: 79px;
+    padding-top: 45px;
 }
 
 .home-ride-form{
@@ -21,6 +24,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    width: 100%;
 }
 
 .home-main-line > h2{
@@ -50,4 +54,56 @@
 
 .color{
     background-color: #f2f4f6;
+}
+
+.home-rental-form{
+    justify-content: space-between;
+}
+
+.location-input-rental{
+    padding: 12px;
+    width: 65%;
+}
+
+.homepage-container{
+    padding: 100px;
+    background-color: black;
+}
+
+.container-detail{
+    color: white;
+    padding-right: 80px;
+}
+
+.container-detail > h2{
+    font-size: 55px;
+    margin-bottom: 0;
+}
+
+.container-detail > h3{
+    font-size: 55px;
+    margin-top: 20px;
+}
+
+.container-detail > p{
+    font-size: 20px;
+    color: rgb(215, 215, 215);
+}
+
+.home-img2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.homepage-container2{
+    padding: 100px;
+}
+
+.container-detail-imp{
+    color: black !important;
+}
+
+.container-detail-imp > p{
+    color: rgb(67, 67, 67);
 }

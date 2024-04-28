@@ -55,7 +55,7 @@ export default function MultipleSelect(props) {
 
   return (
     <div>
-      <FormControl  className= "selectInput" sx={{ width: 365  , marginTop:1}}>
+      <FormControl  className= "selectInput" sx={{ width: "70%"  , marginTop:1}}>
         <InputLabel id="demo-multiple-name-label">Select Package</InputLabel>
         <Select
           labelId="demo-multiple-name-label"

@@ -19,7 +19,19 @@ import {
     DRIVER_FORGOT_PASSWORD_SUCCESS,
     DRIVER_RESET_PASSWORD_REQUEST,
     DRIVER_RESET_PASSWORD_SUCCESS,
-    DRIVER_RESET_PASSWORD_FAIL
+    DRIVER_RESET_PASSWORD_FAIL,
+    DRIVER_DETAILS_FAIL,
+    DRIVER_DETAILS_REQUEST,
+    DRIVER_DETAILS_SUCCESS,
+    UPDATE_DRIVER_FAIL,
+    UPDATE_DRIVER_REQUEST,
+    UPDATE_DRIVER_SUCCESS,
+    DELETE_DRIVER_FAIL,
+    DELETE_DRIVER_REQUEST,
+    DELETE_DRIVER_SUCCESS,
+    ALL_DRIVERS_FAIL,
+    ALL_DRIVERS_REQUEST,
+    ALL_DRIVERS_SUCCESS
  } from "../constants/userConstants";
 import axios from "axios";
 
@@ -164,6 +176,74 @@ export const driverResetPassword = (token, passwords) => async (dispatch) => {
       });
     }
 };
+
+// get All Drivers -- admin
+export const getAllDrivers = (userRole) => async (dispatch) => {
+    try {
+      dispatch({ type: ALL_DRIVERS_REQUEST });
+
+      const config = { headers: { "Content-Type": "application/json" } };
+      
+      const { data } = await axios.post(`http://localhost:3000/admin/alldrivers`, {userRole}, config);
+  
+      dispatch({ type: ALL_DRIVERS_SUCCESS, payload: data.drivers });
+    } catch (error) {
+      dispatch({ type: ALL_DRIVERS_FAIL, payload: error.response.data });
+    }
+  };
+
+  // Delete User
+export const deleteDriver = (id) => async (dispatch) => {
+    try {
+      dispatch({ type: DELETE_DRIVER_REQUEST });
+  
+      const { data } = await axios.delete(`http://localhost:3000/admin/driver/${id}`);
+  
+      dispatch({ type: DELETE_DRIVER_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: DELETE_DRIVER_FAIL,
+        payload: error.response.data,
+      });
+    }
+  };
+
+// get  User Details
+export const getDriverDetails = (id, userRole) => async (dispatch) => {
+    try {
+      dispatch({ type: DRIVER_DETAILS_REQUEST });
+
+      const config = { headers: { "Content-Type": "application/json" } };
+
+      const { data } = await axios.post(`http://localhost:3000/admin/driver/${id}`, {userRole}, config);
+  
+      dispatch({ type: DRIVER_DETAILS_SUCCESS, payload: data.driver });
+    } catch (error) {
+      dispatch({ type: DRIVER_DETAILS_FAIL, payload: error.response.data.message });
+    }
+  };
+
+// Update User
+export const updateDriver = (id, userData) => async (dispatch) => {
+    try {
+      dispatch({ type: UPDATE_DRIVER_REQUEST });
+  
+      const config = { headers: { "Content-Type": "application/json" } };
+  
+      const { data } = await axios.put(
+        `http://localhost:3000/admin/driver/${id}`,
+        userData,
+        config
+      );
+  
+      dispatch({ type: UPDATE_DRIVER_SUCCESS, payload: data.success });
+    } catch (error) {
+      dispatch({
+        type: UPDATE_DRIVER_FAIL,
+        payload: error.response.data,
+      });
+    }
+  };
 
 
 

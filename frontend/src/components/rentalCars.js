@@ -8,6 +8,7 @@ import "../stylesheets/rental.css"
 import { bookRentCar } from '../actions/rentActions';
 import GooglePayButton from '@google-pay/button-react';
 import {useAlert} from 'react-alert';
+import economy from "../resources/booking/economy.png";
 
 const RentalCars = (props) => {
 
@@ -64,7 +65,7 @@ const RentalCars = (props) => {
     return(
         <div className= "RentalCarCard">
             <div className='car-img'>
-                <img src= {props.rentalCars.images[0].url} alt={props.rentalCars.name} />
+                <img src= {economy} alt={props.rentalCars.name} />
             </div>
             <div className='car-details'>
                 <p className='car-name'>{props.rentalCars.name} <span className='model'>{props.rentalCars.model}</span></p>

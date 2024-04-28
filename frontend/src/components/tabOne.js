@@ -84,24 +84,28 @@ function Tab1(props){
     }
 
     return(
-        <div className = "tabOne home-booking-form">
-            <div className='home-main-line'>
-                <h2>Let's Ride...</h2>
-                <p>Enter a location and enjoy your ride with us.</p>
-            </div>
-            <form className = "tabOne home-booking-form">
-                <AddressAutofill options={{country: 'IN'}} accessToken='pk.eyJ1Ijoibml0aW5kaGltYW4iLCJhIjoiY2x1NDA3Y2R2MTlwaDJrcXM1NnliNTZ5aSJ9.lGvVeEvnZksL2DCWLSbAug'>
-                    <input className='home-booking-form-input' autoComplete='true' value={locationValue} onChange={(e) => setLocationValue(e.target.value)} name='location-box' placeholder='Enter Location'></input>
-                </AddressAutofill>
-                <AddressAutofill options={{country: 'IN'}} accessToken='pk.eyJ1Ijoibml0aW5kaGltYW4iLCJhIjoiY2x1NDA3Y2R2MTlwaDJrcXM1NnliNTZ5aSJ9.lGvVeEvnZksL2DCWLSbAug'>
-                    <input className='home-booking-form-input' autoComplete='address line-1 address line-2' value={destinationValue} onChange={(e) => setDestinationValue(e.target.value)} name='destination-box' placeholder='Enter Destination'></input>
-                </AddressAutofill>
-                <div className='button-flex'>
-                    <button className="tab1Button" onClick={handleGeocode}>Get Location</button>
-                    <button className='tab1Button' type='submit' onClick={handleClick}>Search {props.buttonName} Cabs</button>
+        <div className = "tabOne home-booking-form1">
+            <div className='main-form'>
+                <div className='home-main-line'>
+                    <h2>Let's Ride...</h2>
+                    <p>Enter a location and enjoy your ride with us.</p>
                 </div>
-            </form>
-            <Map lati={coordinates[1]} lngi={coordinates[0]} destLati={destCoordinates[1]} destLngi={destCoordinates[0]} />
+                <form className = "tabOne home-booking-form">
+                    <AddressAutofill options={{country: 'IN'}} accessToken='pk.eyJ1Ijoibml0aW5kaGltYW4iLCJhIjoiY2x1NDA3Y2R2MTlwaDJrcXM1NnliNTZ5aSJ9.lGvVeEvnZksL2DCWLSbAug'>
+                        <input className='home-booking-form-input' autoComplete='true' value={locationValue} onChange={(e) => setLocationValue(e.target.value)} name='location-box' placeholder='Enter Location'></input>
+                    </AddressAutofill>
+                    <AddressAutofill options={{country: 'IN'}} accessToken='pk.eyJ1Ijoibml0aW5kaGltYW4iLCJhIjoiY2x1NDA3Y2R2MTlwaDJrcXM1NnliNTZ5aSJ9.lGvVeEvnZksL2DCWLSbAug'>
+                        <input className='home-booking-form-input' autoComplete='address line-1 address line-2' value={destinationValue} onChange={(e) => setDestinationValue(e.target.value)} name='destination-box' placeholder='Enter Destination'></input>
+                    </AddressAutofill>
+                    <div className='button-flex'>
+                        <button className="tab1Button" onClick={handleGeocode}>Get Location</button>
+                        <button className='tab1Button' type='submit' onClick={handleClick}>Search {props.buttonName} Cabs</button>
+                    </div>
+                </form>
+            </div>
+            <div className='map'>
+                <Map lati={coordinates[1]} lngi={coordinates[0]} destLati={destCoordinates[1]} destLngi={destCoordinates[0]} />
+            </div>
         </div>
     );
 }

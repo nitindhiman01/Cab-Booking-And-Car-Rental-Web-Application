@@ -30,6 +30,12 @@ import {
     DRIVER_RESET_PASSWORD_REQUEST,
     DRIVER_RESET_PASSWORD_SUCCESS,
     DRIVER_RESET_PASSWORD_FAIL,
+    DRIVER_DETAILS_REQUEST,
+    DRIVER_DETAILS_FAIL,
+    DRIVER_DETAILS_SUCCESS,
+    ALL_DRIVERS_FAIL,
+    ALL_DRIVERS_REQUEST,
+    ALL_DRIVERS_SUCCESS
 } from "../constants/userConstants"
 
 
@@ -185,3 +191,68 @@ export const driverProfileReducer = (state = {}, action) => {
         return state;
     }
   };
+
+  
+export const allDriversReducer = (state = { drivers: [] }, action) => {
+  switch (action.type) {
+    case ALL_DRIVERS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case ALL_DRIVERS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        drivers: action.payload,
+      };
+
+    case ALL_DRIVERS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const driverDetailsReducer = (state = { driver: {} }, action) => {
+  switch (action.type) {
+    case DRIVER_DETAILS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case DRIVER_DETAILS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        driver: action.payload,
+      };
+
+    case DRIVER_DETAILS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+};

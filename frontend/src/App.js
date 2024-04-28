@@ -20,6 +20,13 @@ import DriverAccountUpdate from "./components/driverAccountUpdate.js";
 import DriverPasswordUpdate from "./components/driverPasswordUpdate.js";
 import DriverForgotPass from "./components/driverForgotPass.js";
 import DriverResetPassword from "./components/driverResetPass.js";
+import AdminDash from "./components/adminDash.js";
+import AdminBookings from "./components/adminBookings.js";
+import AdminUsers from "./components/adminUsers.js";
+import UpdateUserAdmin from "./components/updateUserAdmin.js";
+import AdminDrivers from "./components/adminDrivers.js";
+import UpdateDriverAdmin from "./components/updateDriverAdmin.js";
+import AdminCars from "./components/adminCars.js";
 
 
 function App(){
@@ -48,10 +55,6 @@ function App(){
   const priceCall = (data) => {
     price = data;
   }
-
-  // useEffect(() => {
-  //   console.log(data);
-  // }, [data])
 
   function handleConfirm(){
     if(window.confirm(`A nearby user is requesting a ride.`)){
@@ -86,7 +89,7 @@ function App(){
   return(
       <div>
           <Routes>
-            <Route path="/" index element={<IndexHomePage  />}></Route>"
+            <Route path="/" index element={<IndexHomePage  />}></Route>
             <Route path='/rental' element={<RentalHome />}></Route>
             <Route path='/cabBooking' element={<Booking parentCallBack={handleCallBack} priceCallBack={priceCall} />}></Route>
             <Route path ='/login' element={<LoginSignup />}></Route>
@@ -103,6 +106,13 @@ function App(){
             <Route path="/driver/password/update" element={<DriverPasswordUpdate />}></Route>
             <Route path="/driver/password/forgot" element={<DriverForgotPass />}></Route>
             <Route path="/driver/password/reset/:token" element={<DriverResetPassword />}></Route>
+            <Route path="/admin/dashboard" element={<AdminDash />}></Route>
+            <Route path="/admin/allbookings" element={<AdminBookings />}></Route>
+            <Route path="/admin/allusers" element={<AdminUsers />}></Route>
+            <Route path="/admin/user/:id" element={<UpdateUserAdmin />}></Route>
+            <Route path="/admin/alldrivers" element={<AdminDrivers />}></Route>
+            <Route path="/admin/driver/:id" element={<UpdateDriverAdmin />}></Route>
+            <Route path="/admin/allCars" element={<AdminCars />}></Route>
           </Routes>
       </div>
   );

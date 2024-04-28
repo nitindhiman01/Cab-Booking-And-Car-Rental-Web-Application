@@ -16,14 +16,14 @@ function Homepage(){
                     <div className='tabs'>
                         <BasicTabs />
                     </div>
-                    <div className='home-main-line'>
+                    {/* <div className='home-main-line'>
                         <h2>Let's Ride...</h2>
                         <p>Enter a location and enjoy your ride with us.</p>
-                    </div>
+                    </div> */}
                 </div>
-                <div className='home-img-container'>
+                {/* <div className='home-img-container'>
                     <img src={MainHomePageImg} alt='home-img'></img>
-                </div>
+                </div> */}
             </div>
             <HomepageContainer />
         </div>

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import {ALL_RENT_FAIL, ALL_RENT_REQUEST, ALL_RENT_SUCCESS, CLEAR_ERRORS, RENT_FAIL, RENT_REQUEST, RENT_SUCCESS} from "../constants/rentCarConstants";
+import {ALL_RENT_FAIL, ALL_RENT_REQUEST, ALL_RENT_SUCCESS, CLEAR_ERRORS, RENT_FAIL, RENT_REQUEST, RENT_SUCCESS, DELETE_BOOKING_FAIL, DELETE_BOOKING_REQUEST, DELETE_BOOKING_SUCCESS} from "../constants/rentCarConstants";
 
 export const getrentCars = () => async (dispatch) => {
     try {
@@ -43,6 +43,22 @@ export const bookRentCar = (carData) => async (dispatch) => {
         });
     }
 }
+
+//DeleteBooking
+export const deleteBooking = (id) => async (dispatch) => {
+    try {
+      dispatch({ type: DELETE_BOOKING_REQUEST });
+        console.log("working");
+      const { data } = await axios.delete(`http://localhost:3000/admin/deletebooking/${id}`);
+        console.log("working");
+      dispatch({ type: DELETE_BOOKING_SUCCESS, payload: data.success });
+    } catch (error) {
+      dispatch({
+        type: DELETE_BOOKING_FAIL,
+        payload: error.message,
+      });
+    }
+};
 
 export const clearErrors = () => async(dispatch) => {
     dispatch({type: CLEAR_ERRORS});

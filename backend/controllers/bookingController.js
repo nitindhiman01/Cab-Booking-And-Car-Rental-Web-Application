@@ -48,15 +48,15 @@ exports.getSingleBooking = catchASyncErrors(async (req, res, next) => {
 
   //Get all bookings -- ADMIN
   exports.getAllBookings = catchASyncErrors(async (req, res, next) => {
-    const bookings = await Booking.find();
+    const adminbookings = await Booking.find();
   
     res.status(200).json({
       success: true,
-      bookings,
+      adminbookings,
     });
   });
 
-  //Delete Booking
+  //Delete Booking -- ADMIN
   exports.deleteBooking = catchASyncErrors(async(req, res, next) => {
     let booking = await Booking.findById(req.params.id);
 
@@ -64,7 +64,7 @@ exports.getSingleBooking = catchASyncErrors(async (req, res, next) => {
         return next(new ErrorHandler(`No such booking exists with the ID: ${req.params.id}`, 404));
     }
 
-    booking = await Booking.findByIdAndDelete(req.params.id);
+    await booking.deleteOne();
 
     res.status(200).json({
         success: true,

@@ -12,7 +12,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import "../stylesheets/navbar.css";
 import {useNavigate} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { logout } from '../actions/userActions';
 import {useAlert} from 'react-alert';
 
@@ -24,6 +24,8 @@ function ResponsiveAppBar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const alert = useAlert();
+
+  const {user} = useSelector((state) => state.user);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -59,6 +61,11 @@ function ResponsiveAppBar() {
   function handleDriverSignIn(e){
     e.preventDefault();
     navigate('/driver/login');
+  }
+
+  function handleAdminDash(e){
+    e.preventDefault();
+    navigate('/admin/dashboard');
   }
 
   return (
@@ -177,6 +184,7 @@ function ResponsiveAppBar() {
                 <li><button onClick={handleLogin}> User Sign in</button></li>
                 <li><button onClick={handleDriverSignIn}>Driver Sign In</button></li>
                 <li><button onClick={handleLogout}>Log Out</button></li>
+                { user.role === "admin" ? (<li><button onClick={handleAdminDash}>Admin Dashboard</button></li>) : (<div></div>) }  
               </ul>
             </Menu>
           </Box>

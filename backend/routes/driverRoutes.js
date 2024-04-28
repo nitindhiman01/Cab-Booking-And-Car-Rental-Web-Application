@@ -34,12 +34,12 @@ router.route("/driver/password/update").put(updateDriverPassword);
 
 router.route("/driver/account/update").put(updateDriverProfile);
 
-router.route("/admin/alldrivers").get(isAuthenticatedUser, authorizeRoles("admin"), getAllDrivers);
+router.route("/admin/alldrivers").post(authorizeRoles("admin"), getAllDrivers);
 
 router
     .route("/admin/driver/:id")
-    .get(isAuthenticatedUser, authorizeRoles("admin"), getSingleDriver)
-    .put(isAuthenticatedUser, authorizeRoles("admin"), updateDriverProfileAdmin)
-    .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteDriver);
+    .post(authorizeRoles("admin"), getSingleDriver)
+    .put(authorizeRoles("admin"), updateDriverProfileAdmin)
+    .delete(deleteDriver);
 
 module.exports = router

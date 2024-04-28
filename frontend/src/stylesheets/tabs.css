@@ -1,7 +1,7 @@
 .tab1Button{
     margin-top: 8px;
     height: 45px;
-    width: 40%;
+    width: 32%;
     padding: 5px;
     background-color: white;
     margin-right: 5px;
@@ -14,14 +14,38 @@
 
 .selectInput{
     margin-top:15px;
+    width: 70%;
 }
 .home-img2 >img{
-    height: 650px;
-    width:65%;
-    border-radius: 100%;
-    clip-path: inset(70px 70px 70px 70px);
-    object-fit:cover;
+    height: 500px
 
+}
+
+.home-booking-form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.home-booking-form1{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 60vh;
+}
+
+.main-form{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+
+.tabs{
+    width: 100%;
+}
+
+.map{
+    width: 60%;
 }
 
     

@@ -3,10 +3,10 @@ import { createStore, combineReducers, applyMiddleware} from 'redux';
 import { thunk }  from 'redux-thunk';
 
 import { composeWithDevTools } from "redux-devtools-extension";
-import { forgotPasswordReducer, profileReducer, userReducer } from './reducers/userReducer';
-import { driverProfileReducer, driverReducer, driverforgotPasswordReducer } from './reducers/driverReducer';
+import { AdminBookingsReducer, allUsersReducer, forgotPasswordReducer, profileReducer, userDetailsReducer, userReducer } from './reducers/userReducer';
+import { allDriversReducer, driverDetailsReducer, driverProfileReducer, driverReducer, driverforgotPasswordReducer } from './reducers/driverReducer';
 import { rentReducer } from './reducers/rentReducer';
-import { bookReducer, myBookingsReducer } from './reducers/bookReducer';
+import { bookReducer, deletebookReducer, myBookingsReducer } from './reducers/bookReducer';
 
 const reducer = combineReducers({
     user: userReducer,
@@ -18,6 +18,12 @@ const reducer = combineReducers({
     myBookings: myBookingsReducer,
     driverProfile: driverProfileReducer,
     driverforgotPassword: driverforgotPasswordReducer,
+    adminBookings: AdminBookingsReducer,
+    deleteBooking: deletebookReducer,
+    users: allUsersReducer,
+    userDetails: userDetailsReducer,
+    driverDetails: driverDetailsReducer,
+    drivers: allDriversReducer,
 });
 
 let initialState = {};

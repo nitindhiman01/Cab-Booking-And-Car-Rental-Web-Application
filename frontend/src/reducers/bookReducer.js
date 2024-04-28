@@ -1,5 +1,5 @@
 import { loadUser } from "../actions/userActions";
-import {CLEAR_ERRORS, RENT_REQUEST, RENT_SUCCESS, RENT_FAIL, MY_BOOKINGS_FAIL, MY_BOOKINGS_REQUEST, MY_BOOKINGS_SUCCESS} from "../constants/rentCarConstants";
+import {CLEAR_ERRORS, RENT_REQUEST, RENT_SUCCESS, RENT_FAIL, MY_BOOKINGS_FAIL, MY_BOOKINGS_REQUEST, MY_BOOKINGS_SUCCESS, DELETE_BOOKING_FAIL, DELETE_BOOKING_REQUEST, DELETE_BOOKING_RESET, DELETE_BOOKING_SUCCESS} from "../constants/rentCarConstants";
 
 export const bookReducer = (state = {}, action) => {
 
@@ -56,3 +56,40 @@ export const myBookingsReducer = (state = {myBookings: []}, action) => {
             return state;
     }
 }
+
+export const deletebookReducer = (state = {}, action) => {
+    switch (action.type) {
+      case DELETE_BOOKING_REQUEST:
+        return {
+          ...state,
+          loading: true,
+        };
+  
+      case DELETE_BOOKING_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          isDeleted: action.payload,
+        };
+      case DELETE_BOOKING_FAIL:
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+        };
+      case DELETE_BOOKING_RESET:
+        return {
+          ...state,
+          isDeleted: false,
+        };
+      case CLEAR_ERRORS:
+        return {
+          ...state,
+          error: null,
+        };
+  
+      default:
+        return state;
+    }
+  };
+

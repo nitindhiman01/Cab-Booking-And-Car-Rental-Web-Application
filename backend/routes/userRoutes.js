@@ -33,12 +33,12 @@ router.route("/password/update").put(updatePassword);
 
 router.route("/account/update").put(updateProfile);
 
-router.route("/admin/users").get(isAuthenticatedUser, authorizeRoles("admin"), getAllUsers);
+router.route("/admin/users").post(authorizeRoles("admin"), getAllUsers);
 
 router
     .route("/admin/user/:id")
-    .get(isAuthenticatedUser, authorizeRoles("admin"), getSingleUser)
-    .put(isAuthenticatedUser, authorizeRoles("admin"), updateProfileAdmin)
-    .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteUser);
+    .post(authorizeRoles("admin"), getSingleUser)
+    .put(authorizeRoles("admin"), updateProfileAdmin)
+    .delete(deleteUser);
 
 module.exports = router

@@ -38,6 +38,7 @@ const UserRequest = () => {
                 <Map lati={coordinates[1]} lngi={coordinates[0]} destLati={destCoordinates[1]} destLngi={destCoordinates[0]} />
             </div>
             <div className='function-container'>
+              <h4>Chat with driver</h4>
                 <div className='chat-box'>
                     <div className='message-container'>
                         {messages.map((m,i) => (
@@ -49,8 +50,8 @@ const UserRequest = () => {
                     </div>
                     <div className='text-message'>
                         <form onSubmit={handleSubmit}>
-                            <input value={message} onChange={(e) => {setMessage(e.target.value)}} placeholder='Enter Message'></input>
-                            <button type='submit'>Send</button>
+                            <input className='message-input' value={message} onChange={(e) => {setMessage(e.target.value)}} placeholder='Enter Message'></input>
+                            <button className='message-send' type='submit'>Send</button>
                         </form>
                     </div>
                 </div>

@@ -16,7 +16,7 @@ const ResetPassword = () => {
     const navigate = useNavigate();
     const params = useParams();
 
-    const { error, success, loading } = useSelector(
+    const { error, success } = useSelector(
         (state) => state.driverforgotPassword
     );
 

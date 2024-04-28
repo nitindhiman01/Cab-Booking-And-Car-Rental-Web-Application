@@ -3,6 +3,7 @@ import "../stylesheets/homepage.css";
 import "../stylesheets/tabs.css";
 import {useNavigate} from 'react-router-dom';
 import MultipleSelect from "./drawer.js";
+import MainHomePageImg from "../resources/homepage/rental2.jpg";
 
 function Tab2(){
 
@@ -23,12 +24,21 @@ function Tab2(){
     }
 
     return(
-        <div className = "tabOne home-booking-form">
-            <form onSubmit={handleSubmit}>
-                <input value={location} onChange={(e) => {setLocation(e.target.value)}} name='location-box' placeholder='Enter Location'></input>
-                <MultipleSelect parentCallBack = {handleCallBack} />
-                <button className="tab1Button" type='submit'>Search Cabs</button>
-            </form>
+        <div className = "tabOne home-booking-form1 home-rental-form">
+            <div className='main-form'>
+                <div className='home-main-line'>
+                    <h2>Let's Ride...</h2>
+                    <p>Enter a location and enjoy your ride with us.</p>
+                </div>
+                <form className='main-rental-form' onSubmit={handleSubmit}>
+                    <input className='location-input-rental' value={location} onChange={(e) => {setLocation(e.target.value)}} name='location-box' placeholder='Enter Location'></input>
+                    <MultipleSelect className="select-input" parentCallBack = {handleCallBack} />
+                    <button className="tab1Button" type='submit'>Search Cabs</button>
+                </form>
+            </div>
+            <div className='home-img-container'>
+                <img src={MainHomePageImg} alt='home-img'></img>
+            </div>
         </div>
         
     );
